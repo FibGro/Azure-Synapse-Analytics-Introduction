@@ -1,0 +1,20 @@
+{
+	"name": "9_explore_trip_delta",
+	"properties": {
+		"folder": {
+			"name": "nyc_taxi/discovery"
+		},
+		"content": {
+			"query": "USE nyc_taxi_discovery;\n\n-- Use the Delta\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data_raw',\n        FORMAT = 'DELTA'\n    ) AS trip_data\n\n-- Check the data type\nEXEC sp_describe_first_result_set N'SELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK ''trip_data_green_delta/'',\n        DATA_SOURCE = ''nyc_taxi_data_raw'',\n        FORMAT = ''DELTA''\n    ) AS trip_data'\n\n\n-- Change the datatype\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data_raw',\n        FORMAT = 'DELTA'\n    )\nWITH(\n    trip_amount FLOAT,\n    trip_type INT,\n    year VARCHAR(4),\n    month VARCHAR(2)\n)AS trip_data;\n\n-- Use the partition within Delta (WHERE clause)\nSELECT\n    COUNT(DISTINCT payment_type)\nFROM\n    OPENROWSET(\n        BULK 'trip_data_green_delta/',\n        DATA_SOURCE = 'nyc_taxi_data_raw',\n        FORMAT = 'DELTA'\n    )AS trip_data\nWHERE year ='2020' AND month = '01';\n\n\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_discovery",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
