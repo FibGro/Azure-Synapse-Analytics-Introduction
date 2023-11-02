@@ -2,7 +2,7 @@
 	"name": "2_create_datasource_ldw3",
 	"properties": {
 		"folder": {
-			"name": "nyc_taxi/ldw"
+			"name": "nyc_taxi/ldw3"
 		},
 		"content": {
 			"query": "USE nyc_taxi_ldw3;\n\n-- CREATE DATASOURCES\nCREATE EXTERNAL DATA SOURCE nyc_taxi_scr\nWITH \n(   LOCATION = 'https://synapsecoursedl52.dfs.core.windows.net/nyc-taxi-data'\n); \n\n\n",

@@ -2,7 +2,7 @@
 	"name": "1_create_database_ldw3",
 	"properties": {
 		"folder": {
-			"name": "nyc_taxi/ldw"
+			"name": "nyc_taxi/ldw3"
 		},
 		"content": {
 			"query": "\n-- Use the master database\nUSE master\nGO\n\n-- Create the database\nCREATE DATABASE nyc_taxi_ldw3\nGO\n\n-- Alter the databse Collate \nALTER DATABASE nyc_taxi_ldw3 COLLATE latin1_General_100_BIN2_UTF8\nGO\n\nUSE nyc_taxi_ldw3\nGO\n\n-- Create the Schema \nCREATE SCHEMA bronze\nGO \n\nCREATE SCHEMA silver\nGO \n\nCREATE SCHEMA golden\nGO \n",
