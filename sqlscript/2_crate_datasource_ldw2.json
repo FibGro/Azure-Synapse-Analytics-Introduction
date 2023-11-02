@@ -1,0 +1,20 @@
+{
+	"name": "2_crate_datasource_ldw2",
+	"properties": {
+		"folder": {
+			"name": "nyc_taxi/ldw"
+		},
+		"content": {
+			"query": "USE nyc_taxi_ldw2;\n\n-- CREATE DATASOURCES\nCREATE EXTERNAL DATA SOURCE nyc_taxi_scr\nWITH \n(   LOCATION = 'https://synapsecoursedl52.dfs.core.windows.net/nyc-taxi-data'\n); ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw2",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
