@@ -1,5 +1,5 @@
 {
-	"name": "SQL script 1",
+	"name": "7_create_external_table_delta",
 	"properties": {
 		"folder": {
 			"name": "nyc_taxi/ldw3"
