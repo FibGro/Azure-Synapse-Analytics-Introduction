@@ -1,2 +1,7 @@
-# Azure-Synapse-Analysis
-Practise with Azure Synapse Analysis : Query various of file (csv, parquet and delta) using Serverless SQL
+# Azure-Synapse-Analytics 
+
+Practise using Azure Synapse Analysis: 
+
+- Query various types of files such CSV, Parquet and Delta using Serverless SQL
+- Data discovery using Serverless SQL
+- 
