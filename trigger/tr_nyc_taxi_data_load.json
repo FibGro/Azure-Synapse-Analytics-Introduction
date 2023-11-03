@@ -1,0 +1,18 @@
+{
+	"name": "tr_nyc_taxi_data_load",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 30,
+				"startTime": "2023-11-03T14:20:00",
+				"endTime": "2023-11-04T15:00:00",
+				"timeZone": "W. Europe Standard Time"
+			}
+		}
+	}
+}
