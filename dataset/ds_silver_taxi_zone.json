@@ -5,6 +5,9 @@
 			"referenceName": "ls_synapsecoursedl52",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "demo"
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
