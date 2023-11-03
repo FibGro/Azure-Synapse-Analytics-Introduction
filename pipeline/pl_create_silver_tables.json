@@ -47,7 +47,7 @@
 							}
 						},
 						{
-							"name": "Create Taxi Zone Store Procedure",
+							"name": "Create  Store Procedure",
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
