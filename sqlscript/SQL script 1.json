@@ -2,7 +2,7 @@
 	"name": "SQL script 1",
 	"properties": {
 		"content": {
-			"query": "USE nyc_taxi_ldw3;\n\nSELECT DISTINCT\n    year,\n    month \nFROM bronze.vw_trip_data_green_csv;",
+			"query": "SELECT TOP (100)[pu_location_id]\n,[total_trip_count]\n,[year]\n,[month]\n,[total_fare_amount]\nFROM [nyc_taxi_ldw_spark].[dbo].[trip_data_green_agg]",
 			"metadata": {
 				"language": "sql"
 			},
