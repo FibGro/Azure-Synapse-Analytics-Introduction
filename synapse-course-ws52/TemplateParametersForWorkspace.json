@@ -13,6 +13,9 @@
 		},
 		"synapse-course-ws52-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://synapsecoursedl52.dfs.core.windows.net"
+		},
+		"ls_synapsecoursedl52_properties_typeProperties_url": {
+			"value": "https://synapsecoursedl52.dfs.core.windows.net/"
 		}
 	}
 }

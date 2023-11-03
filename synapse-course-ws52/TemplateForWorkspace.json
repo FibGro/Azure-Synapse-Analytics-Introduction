@@ -19,6 +19,10 @@
 		"synapse-course-ws52-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://synapsecoursedl52.dfs.core.windows.net"
+		},
+		"ls_synapsecoursedl52_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://synapsecoursedl52.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -960,6 +964,25 @@
 				"type": "SqlQuery"
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/ls_synapsecoursedl52')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_synapsecoursedl52_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
 		}
 	]
 }
