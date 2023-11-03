@@ -1,0 +1,20 @@
+{
+	"name": "17_gold_trip_data_green",
+	"properties": {
+		"folder": {
+			"name": "nyc_taxi/ldw3"
+		},
+		"content": {
+			"query": "USE nyc_taxi_ldw3;\n\n/*\nCampain Requirement\nLet start with the SELECT statement required to satify the requirement \n\n\n-- Check just to get the datetime (tip_date)\nSELECT TOP(100)\n        year,\n        month,\n        CONVERT(DATE, td.lpep_pickup_datetime) AS trip_date\nFROM silver.vw_trip_data_green td \nWHERE year = '2020'\nAND month = '01'\n*/\n\nSELECT TOP(100)\n        year,\n        month,\n        tz.borough,\n        CONVERT(DATE, td.lpep_pickup_datetime) AS trip_date\nFROM silver.vw_trip_data_green td \nJOIN silver.taxi_zone tz ON (td.pu_location_id = tz.location_id)\nWHERE year = '2020'\nAND month = '01'",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw3",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
