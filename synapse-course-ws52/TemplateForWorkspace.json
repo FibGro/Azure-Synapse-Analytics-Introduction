@@ -12,6 +12,11 @@
 			"metadata": "Secure string for 'connectionString' of 'synapse-course-ws52-WorkspaceDefaultSqlServer'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-course-ws52.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
+		"ls_serverless_sql_db_nyc_taxi_ldw3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_serverless_sql_db_nyc_taxi_ldw3'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-course-ws52-ondemand.sql.azuresynapse.net,1433;Initial Catalog=nyc_taxi_ldw3"
+		},
 		"bing-covid-19-data_sasUri": {
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'bing-covid-19-data'"
@@ -974,6 +979,94 @@
 				"type": "AzureBlobFS",
 				"typeProperties": {
 					"url": "[parameters('ls_synapsecoursedl52_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/ds_silver_taxi_zone')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_synapsecoursedl52",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "silver/taxi_zone",
+						"fileSystem": "nyc-taxi-data"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/ls_synapsecoursedl52')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/pl_create_silver_taxi_zone')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"description": "Create a pipeline to drop table + CETAS and with DELETE file with existing",
+				"activities": [
+					{
+						"name": "delete_folder_silver_taxi_zone",
+						"description": "DELETE FILE if EXISTS",
+						"type": "Delete",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ds_silver_taxi_zone",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/ds_silver_taxi_zone')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/ls_serverless_sql_db_nyc_taxi_ldw3')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_serverless_sql_db_nyc_taxi_ldw3_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
