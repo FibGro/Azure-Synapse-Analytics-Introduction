@@ -25,5 +25,5 @@ Detail learning process:
 - Azure Cosmos DB
 - Power BI Desktop
 - Azure Data Explorer
-- Power BI
+
 
