@@ -19,6 +19,10 @@ Detail learning process:
 
 ## Technologies Used
 - Azure Synapse Analytics
+- Azure Serverless SQL Pool
+- Azure Dedicated SQL Pool
+- Azure Synapse Link
+- Azure Cosmos DB
 - Power BI Desktop
 - Azure Data Explorer
 - Azure Data Studio 
